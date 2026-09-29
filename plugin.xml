@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-deeplink-bridge"
+        version="1.0.0">
+
+    <name>DeepLinkBridge</name>
+    <description>
+        Registers a custom URL scheme and relays any incoming deep link to
+        JavaScript, regardless of whether the app was already running or was
+        launched cold by the link. Built to let a web page opened in the
+        InAppBrowser system-browser hand control back to the app (e.g. after
+        an external-IdP registration flow completes) without relying on the
+        page itself having access to Cordova/Capacitor APIs, which it does
+        not.
+    </description>
+    <license>MIT</license>
+
+    <!-- Override at install time, e.g.:
+         cordova plugin add <path> --variable URL_SCHEME=myappregister
+         Pick something that does NOT collide with any scheme already
+         registered by another plugin (check your AndroidManifest.xml /
+         Info.plist first). -->
+    <preference name="URL_SCHEME" default="osdlbridge" />
+
+    <js-module src="www/DeepLinkBridge.js" name="DeepLinkBridge">
+        <clobbers target="cordova.plugins.DeepLinkBridge" />
+    </js-module>
+
+    <!-- ANDROID -->
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="DeepLinkBridge">
+                <param name="android-package" value="com.example.deeplinkbridge.DeepLinkBridgePlugin" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                android:name="com.example.deeplinkbridge.DeepLinkActivity"
+                android:exported="true"
+                android:launchMode="singleTask"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="$URL_SCHEME" />
+                </intent-filter>
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/DeepLinkBridgePlugin.java" target-dir="src/com/example/deeplinkbridge" />
+        <source-file src="src/android/DeepLinkActivity.java" target-dir="src/com/example/deeplinkbridge" />
+    </platform>
+
+    <!-- IOS -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="DeepLinkBridge">
+                <param name="ios-package" value="DeepLinkBridgePlugin" />
+            </feature>
+        </config-file>
+
+        <!-- Registers the custom scheme in Info.plist -->
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleURLName</key>
+                    <string>$PACKAGE_NAME.deeplinkbridge</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$URL_SCHEME</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+
+        <source-file src="src/ios/DeepLinkBridgePlugin.swift" />
+    </platform>
+
+</plugin>
