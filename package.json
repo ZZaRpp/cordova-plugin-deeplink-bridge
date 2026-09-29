@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-deeplink-bridge",
+  "version": "1.0.0",
+  "description": "Deeplink bridge for ODC",
+  "cordova": {
+    "id": "cordova-plugin-deeplink-bridge",
+    "platforms": ["android", "ios"]
+  },
+  "keywords": ["ecosystem:cordova", "cordova-android", "cordova-ios"],
+  "license": "MIT"
+}
