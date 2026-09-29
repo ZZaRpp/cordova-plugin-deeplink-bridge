@@ -6,17 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
-/**
- * Registered in AndroidManifest.xml (via plugin.xml) as the sole handler
- * for the custom URL scheme. It has no UI: it exists purely to catch the
- * VIEW/BROWSABLE intent the OS sends when a Custom Tab (or any other app)
- * navigates to that scheme, hand the URL to DeepLinkBridgePlugin, bring the
- * app's own launcher Activity to the foreground, and immediately finish.
- *
- * Bringing the launcher Activity to the front this way is what closes the
- * Custom Tab / SafariViewController session, the same way it closes when a
- * federated-login redirect lands on this app's own scheme.
- */
 public class DeepLinkActivity extends Activity {
 
     @Override
@@ -50,9 +39,7 @@ public class DeepLinkActivity extends Activity {
                 startActivity(launchIntent);
             }
         } catch (Exception e) {
-            // If this ever fails, the URL is still queued in
-            // DeepLinkBridgePlugin and will be delivered once the app's
-            // own Activity is next foregrounded/resumed.
+
         }
     }
 }
