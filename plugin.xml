@@ -15,11 +15,6 @@
     </description>
     <license>MIT</license>
 
-    <!-- Override at install time, e.g.:
-         cordova plugin add <path> --variable URL_SCHEME=myappregister
-         Pick something that does NOT collide with any scheme already
-         registered by another plugin (check your AndroidManifest.xml /
-         Info.plist first). -->
     <preference name="URL_SCHEME" default="osdlbridge" />
 
     <js-module src="www/DeepLinkBridge.js" name="DeepLinkBridge">
