@@ -25,7 +25,7 @@
     <platform name="android">
         <config-file target="config.xml" parent="/*">
             <feature name="DeepLinkBridge">
-                <param name="android-package" value="com.example.deeplinkbridge.DeepLinkBridgePlugin" />
+                <param name="android-package" value="com.productleague.deeplinkbridge.DeepLinkBridgePlugin" />
             </feature>
         </config-file>
 
