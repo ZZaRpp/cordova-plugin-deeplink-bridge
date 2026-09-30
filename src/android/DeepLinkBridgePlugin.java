@@ -1,4 +1,4 @@
-package com.example.deeplinkbridge;
+package com.productleague.deeplinkbridge;
 
 import android.content.Intent;
 
