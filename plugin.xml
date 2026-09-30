@@ -31,7 +31,7 @@
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity
-                android:name="com.example.deeplinkbridge.DeepLinkActivity"
+                android:name="com.productleague.deeplinkbridge.DeepLinkActivity"
                 android:exported="true"
                 android:launchMode="singleTask"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar">
@@ -45,7 +45,7 @@
         </config-file>
 
         <source-file src="src/android/DeepLinkBridgePlugin.java" target-dir="src/com/example/deeplinkbridge" />
-        <source-file src="src/android/DeepLinkActivity.java" target-dir="src/com/example/deeplinkbridge" />
+        <source-file src="src/android/DeepLinkActivity.java" target-dir="src/com/productleague/deeplinkbridge" />
     </platform>
 
     <!-- IOS -->
